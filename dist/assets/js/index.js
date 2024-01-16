@@ -1,7 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports, a as addHmrIntoView, c as createRoot } from "./_virtual_reload-on-update-in-view.js";
 const App = () => {
   const documentRef = reactExports.useRef(document);
-  const clipboard = navigator.clipboard;
   const getUserData = () => {
     const profileOwnersName = document.querySelector(
       ".text-heading-xlarge"
@@ -30,11 +29,6 @@ const App = () => {
       skills: bufInfo[4],
       link: window.location.href
     };
-    clipboard.writeText(String(JSON.stringify(lastWord))).then(() => {
-      console.log("Текст скопирован в буфер обмена");
-    }).catch((err) => {
-      console.error("Не удалось скопировать текст в буфер обмена: ", err);
-    });
     return lastWord;
   };
   function waitForElementToExist(selector, callback) {
@@ -58,7 +52,7 @@ const App = () => {
     }
   }
   const onClickElement = reactExports.useCallback((event) => {
-    if (event.key === "t" || event.key === "e") {
+    if (event.key === "T" || event.key === "Е") {
       const buttonMesage = document.getElementsByClassName(
         "artdeco-button artdeco-button--2 artdeco-button--primary ember-view pvs-profile-actions__action"
       );
@@ -87,7 +81,9 @@ const App = () => {
               console.log("button появился:", element2);
               element2[0].focus();
               element2[0].disabled = false;
-              setTimeout(() => {
+              const timer = setTimeout(() => {
+                console.log("element[0].click()");
+                clearInterval(timer);
               }, 200);
             }
           );

@@ -50,21 +50,20 @@ export const App = () => {
       link: window.location.href,
     };
 
-    clipboard
-      .writeText(String(JSON.stringify(lastWord)))
-      .then(() => {
-        console.log("Текст скопирован в буфер обмена");
-      })
-      .catch((err) => {
-        console.error("Не удалось скопировать текст в буфер обмена: ", err);
-      });
+    // clipboard
+    //   .writeText(String(JSON.stringify(lastWord)))
+    //   .then(() => {
+    //     console.log("Текст скопирован в буфер обмена");
+    //   })
+    //   .catch((err) => {
+    //     console.error("Не удалось скопировать текст в буфер обмена: ", err);
+    //   });
 
     return lastWord;
   };
 
   function waitForElementToExist(selector, callback) {
     const element = document.getElementsByClassName(selector);
-
     if (element && element.length > 0) {
       callback(element);
     } else {
@@ -86,7 +85,7 @@ export const App = () => {
   }
 
   const onClickElement = useCallback((event: any) => {
-    if (event.key === "t" || event.key === "e") {
+    if (event.key === "T" || event.key === "Е") {
       const buttonMesage = document.getElementsByClassName(
         "artdeco-button artdeco-button--2 artdeco-button--primary ember-view pvs-profile-actions__action"
       );
@@ -111,7 +110,6 @@ export const App = () => {
           const STRING = String(JSON.stringify(getUserData()));
           console.log("Элемент textarea:", element);
           element[0].focus();
-
           element[0].value = STRING.slice(0, 199);
           element[0].blur();
 
@@ -121,9 +119,10 @@ export const App = () => {
               console.log("button появился:", element);
               element[0].focus();
               element[0].disabled = false;
-              setTimeout(() => {
+              const timer = setTimeout(() => {
                 // element[0].click();
-                
+                console.log('element[0].click()');
+                clearInterval(timer);
               }, 200);
             }
           );
